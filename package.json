@@ -2,7 +2,7 @@
   "name": "react-native-ticker",
   "version": "4.0.0",
   "description": "React Native Number Ticker",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "prepublishOnly": "yarn build",
     "build": "tsc"

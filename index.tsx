@@ -47,6 +47,8 @@ interface Props {
   textProps?: TextProps;
   additionalDisplayItems?: string[];
   children: React.ReactNode;
+  otherIndex?: number
+  otherTextStyle?: TextStyle
 }
 
 interface TickProps {
@@ -131,7 +133,7 @@ const TickItem: React.FC<TickProps> = ({
   );
 };
 
-const Ticker: React.FC<Props> = ({ duration = 250, textStyle, textProps, children }) => {
+const Ticker: React.FC<Props> = ({ duration = 250, textStyle, textProps, otherIndex = 0, otherTextStyle = {}, children }) => {
   const [measured, setMeasured] = useState<boolean>(false);
 
   const measureMap = useRef<MeasureMap>({});
@@ -171,7 +173,10 @@ const Ticker: React.FC<Props> = ({ duration = 250, textStyle, textProps, childre
                 <TickItem
                   key={index}
                   duration={duration}
-                  textStyle={textStyle}
+                  textStyle={{
+                    ...textStyle, 
+                    ...(index >= otherIndex ? otherTextStyle : {})
+                  }}
                   textProps={textProps}
                   rotateItems={items}
                   measureMap={measureMap.current}
